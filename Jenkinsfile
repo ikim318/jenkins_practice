@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent { label 'docker-agent-alpine' }
 
     stages {
         stage('Git') {
@@ -9,6 +9,7 @@ pipeline {
         }
 
         stage('Build') {
+            agent docker { image 'python:3.11.7-alpine3.19' }
             steps {
                 sh 'python3 helloworld.py'
             }

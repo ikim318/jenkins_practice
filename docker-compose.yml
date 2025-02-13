@@ -1,23 +1,4 @@
-version: '3.7'
-
 services:
-  jenkins-docker:
-    image: docker:dind
-    container_name: jenkins-docker
-    privileged: true
-    environment:
-      - DOCKER_TLS_CERTDIR=/certs
-    volumes:
-      - jenkins-docker-certs:/certs/client
-      - jenkins-data:/var/jenkins_home
-    ports:
-      - "2376:2376"
-    networks:
-      jenkins:
-        aliases:
-          - docker
-    command: --storage-driver overlay2
-
   my-jenkins:
     image: my-jenkins
     container_name: my-jenkins
@@ -40,11 +21,12 @@ services:
     container_name: my-socat
     restart: always
     ports:
-      - "2375:2375"
+      - "127.0.0.1:2376:2375"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
-    command: "tcp-listen:2375,fork,reuseaddr unix-connect:/var/run/docker.sock"
-
+    command: tcp-listen:2375,fork,reuseaddr unix-connect:/var/run/docker.sock
+    networks:
+      - jenkins
 
 networks:
   jenkins:
