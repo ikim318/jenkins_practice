@@ -1,20 +1,14 @@
 pipeline {
-    agent { label 'docker-agent-alpine' }
-
-    stages {
-        stage('Build') {
-            steps {
-                sh 'python3 helloworld.py'
-            }
-        }
-    }
-}
-pipeline {
     agent { 
         node {
             label 'docker-agent-alpine'
             }
       }
+
+    triggers {
+      pollSCM('H/5 * * * *')
+    }
+
     stages {
         stage('Build') {
             agent any
@@ -30,7 +24,7 @@ pipeline {
             steps {
                 echo "Testing.."
                 sh '''
-                echo "doing test stuff..
+                echo "doing test stuff.."
                 '''
             }
         }
