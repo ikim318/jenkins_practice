@@ -1,7 +1,7 @@
 pipeline {
     agent { 
         node {
-            label 'docker-agent-alpine'
+            label 'docker-agent-python'
             }
       }
 
@@ -11,11 +11,6 @@ pipeline {
 
     stages {
         stage('Build') {
-            agent {
-                docker {
-                    image 'python:3.11-alpine'
-                }
-            }
             steps {
                 echo "Building.."
                 sh '''
