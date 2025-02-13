@@ -14,7 +14,7 @@ pipeline {
             steps {
                 echo "Building.."
                 sh '''
-                python3 helloworld.py
+                echo "doing build stuff.."
                 '''
             }
         }
@@ -22,6 +22,7 @@ pipeline {
             steps {
                 echo "Testing.."
                 sh '''
+                echo "doing test stuff.."
                 '''
             }
         }
