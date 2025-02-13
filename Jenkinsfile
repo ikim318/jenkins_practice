@@ -15,7 +15,7 @@ pipeline {
                 echo "Building.."
                 sh '''
                 cd myapp
-                python3 --verison
+                python3 --version
                 '''
             }
         }
