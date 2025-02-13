@@ -16,7 +16,6 @@ pipeline {
                 echo "Building.."
                 sh '''
                 echo "doing build stuff..",
-                // sh 'python3 helloworld.py'
                 '''
             }
         }
