@@ -6,7 +6,7 @@ pipeline {
       }
 
     triggers {
-      pollSCM('H/5 * * * *')
+      pollSCM('*/5 * * * *')
     }
 
     stages {
@@ -16,7 +16,7 @@ pipeline {
                 echo "Building.."
                 sh '''
                 echo "doing build stuff..",
-                sh 'python3 helloworld.py'
+                // sh 'python3 helloworld.py'
                 '''
             }
         }
