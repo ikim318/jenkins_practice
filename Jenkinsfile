@@ -11,7 +11,11 @@ pipeline {
 
     stages {
         stage('Build') {
-            agent any
+            agent {
+                docker {
+                    image 'python:3.11-alpine'
+                }
+            }
             steps {
                 echo "Building.."
                 sh '''
