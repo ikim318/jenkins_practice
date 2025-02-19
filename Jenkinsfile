@@ -5,11 +5,11 @@ pipeline {
         booleanParam(name: 'executeTests', defaultValue: true, description: '')
     }
     stages {
-        stage("Checkout") {
-            steps {
-                checkout scm
-            }
-        }
+        // stage("Checkout") {
+        //     steps {
+        //         checkout scm
+        //     }
+        // }
         stage("Build") {
             steps {
                 sh 'docker-compose build web'
