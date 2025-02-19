@@ -1,44 +1,36 @@
 pipeline {
-    agent { 
-        node {
-            label 'docker-agent-python'
-            }
-      }
-
-    // triggers {
-    //   pollSCM '*/5 * * * *'
-    // }
-
+    agent any
+    parameters {
+        choice(name: 'VERSION', choices: ['1.1.0', '1.2.0', '1.3.0'], description: '')
+        booleanParam(name: 'executeTests', defaultValue: true, description: '')
+    }
     stages {
-        stage('Build') {
+        stage("Build") {
             steps {
-                echo "Building.."
-                sh '''
-                cd myapp
-                python3 -m venv venv
-                . venv/bin/activate
-                pip install -r requirements.txt
-                '''
+                echo 'building the application ...'
+                echo "building version ${NEW_VERSION}"
             }
         }
-        stage('Test') {
+        stage("Test") {
             steps {
-                echo "Testing.."
-                sh '''
-                cd myapp
-                . venv/bin/activate
-                python3 hello.py
-                python3 hello.py --name=Brad
-                '''
+                echo 'testing the application ...'
             }
         }
-        stage('Deploy') {
+        stage("Deploy") {
             steps {
-                echo 'Deploy....'
-                sh '''
-                echo "doing deploy stuff.."
-                '''
+                echo 'deploying the application ...'
             }
+        }
+    }
+    post {
+        always {
+            echo 'building..'
+        }
+        success {
+            echo 'success'
+        }
+        failure {
+            echo 'failure'
         }
     }
 }
