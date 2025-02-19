@@ -14,7 +14,7 @@ pipeline {
             steps {
                 echo 'Building the application...'
                 sh 'ls -la'
-                sh 'docker-compose build web'
+                // sh 'docker-compose build web'
             }
         }
         stage("test") {
