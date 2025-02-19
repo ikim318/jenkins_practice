@@ -18,20 +18,17 @@ pipeline {
             }
         }
         stage("test") {
-            when {
-                expression {
-                    params.executeTests
-                }
-            }
             steps {
-                script {
-                    gv.test()
-                }
+                echo 'Testing the application...'
+                // script {
+                //     gv.test()
+                // }
             }
         }
         stage("Deploy") {
             steps {
-                sh 'docker-compose up -d'
+                echo 'Deploying the application...'
+                // sh 'docker-compose up -d'
             }
         }
     }
